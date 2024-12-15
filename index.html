@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOL Esports Info</title>
+</head>
+<body>
+  <h1>Welcome to LOL Esports Info</h1>
+  <p>Type a query below to get information about LOL players, teams, or leagues:</p>
+
+  <!-- Input field for user query -->
+  <form id="queryForm">
+    <input type="text" id="userQuery" placeholder="Enter your query (e.g., player names, team info)" required>
+    <button type="submit">Search</button>
+  </form>
+
+  <h2>Results:</h2>
+  <div id="results">
+    <p>No results yet. Type a query to see information.</p>
+  </div>
+
+  <script>
+    // JavaScript to handle form submission and display results
+    document.getElementById('queryForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      // Get user query
+      const userQuery = document.getElementById('userQuery').value;
+
+      // Fetch mock data or simulate API response
+      const mockResponse = {
+        "Rosielove": {
+          "role": "Support",
+          "team": "Ultra Prime",
+          "nationality": "China"
+        },
+        "Xerxe": {
+          "role": "Jungler",
+          "team": "Galions",
+          "nationality": "Romania"
+        },
+        "T-esports Championship": {
+          "year": "2024",
+          "winner": "Team Galions",
+          "game": "League of Legends"
+        }
+      };
+
+      // Check if query matches any key in mock data
+      const result = mockResponse[userQuery];
+
+      // Update results section
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+      if (result) {
+        // Display result as a list
+        const ul = document.createElement('ul');
+        for (const [key, value] of Object.entries(result)) {
+          const li = document.createElement('li');
+          li.textContent = `${key}: ${value}`;
+          ul.appendChild(li);
+        }
+        resultsDiv.appendChild(ul);
+      } else {
+        // No result found
+        resultsDiv.textContent = 'No matching information found. Please try a different query.';
+      }
+    });
+  </script>
+</body>
+</html>
